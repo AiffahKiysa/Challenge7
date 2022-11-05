@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Film</string>
+    <string name="app_name">Paid My Film</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="shr_app_name" translatable="false">Binar</string>
     <string name="username">Input Username</string>

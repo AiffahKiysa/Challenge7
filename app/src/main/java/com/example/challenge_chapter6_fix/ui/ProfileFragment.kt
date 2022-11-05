@@ -32,6 +32,9 @@ import com.example.challenge_chapter6_fix.databinding.FragmentProfileBinding
 import com.example.challenge_chapter6_fix.viewModel.BlurViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import com.example.challenge_chapter6_fix.workers.BlurModelFactory
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -43,6 +46,7 @@ class ProfileFragment : Fragment() {
     private val blurViewModel: BlurViewModel by viewModels { BlurViewModel.BlurViewModelFactory(requireActivity().application) }
     private lateinit var pref: DataUserManager
     private var image_uri: Uri? = null
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         private val PERMISSION_CODE = 100;
@@ -54,6 +58,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        auth = Firebase.auth
         pref = DataUserManager(requireContext())
         userViewModel = ViewModelProvider(this, ViewModelFactory(pref))[UserViewModel::class.java]
 
@@ -95,6 +100,7 @@ class ProfileFragment : Fragment() {
 
         binding.cardViewLogout.setOnClickListener(){
             userViewModel.setIsLogin(false)
+            auth.signOut()
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
         }
 

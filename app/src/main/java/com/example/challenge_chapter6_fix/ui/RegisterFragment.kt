@@ -1,6 +1,8 @@
 package com.example.challenge_chapter6_fix.ui
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,10 @@ import com.example.challenge_chapter6_fix.ViewModelFactory
 import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentRegisterBinding
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
@@ -21,11 +27,14 @@ class RegisterFragment : Fragment() {
     private lateinit var pref: DataUserManager
     private lateinit var viewModel: UserViewModel
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        auth = Firebase.auth
         pref = DataUserManager(requireContext())
         viewModel = ViewModelProvider(this, ViewModelFactory(pref))[UserViewModel::class.java]
         _binding = FragmentRegisterBinding.inflate(inflater,container,false)
@@ -54,10 +63,24 @@ class RegisterFragment : Fragment() {
         val password = binding.txtPassword.text.toString()
         val confirmPassword = binding.txtConfirmPassword.text.toString()
 
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(requireContext(), "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+
         if (password == confirmPassword){
             viewModel.saveUser(username, name, email, birthday, nomor, password)
             Toast.makeText(requireContext(), "Data Save", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
         else
             Toast.makeText(requireContext(), "Password Not Match", Toast.LENGTH_SHORT).show()

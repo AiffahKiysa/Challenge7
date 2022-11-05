@@ -51,11 +51,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:hint="@string/username"
+                    android:hint="@string/email"
                     android:textColorHint="#011B1E">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/username"
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
