@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
@@ -20,6 +21,19 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+        }
+        paid {
+            dimension "version"
+            applicationIdSuffix ".paid"
+            versionNameSuffix "-paid"
+        }
+    }
 
     buildTypes {
         release {
@@ -27,6 +41,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    def appModuleRootFolder = '.'
+    def srcDir = 'src'
+    def googleServicesJson = 'google-services.json'
+
+    task switchToFree(type: Copy) {
+        def buildType = 'free'
+        description = 'Switches to FREE google-services.json'
+        from "${srcDir}/${buildType}"
+        include "$googleServicesJson"
+        into "$appModuleRootFolder"
+    }
+
+    task switchToPaid(type: Copy) {
+        def buildType = 'paid'
+        description = 'Switches to PAID google-services.json'
+        from "${srcDir}/${buildType}/"
+        include "$googleServicesJson"
+        into "$appModuleRootFolder"
+    }
+
+    afterEvaluate {
+        project.tasks.findByName('processFreeGoogleServices')?.dependsOn switchToFree
+        project.tasks.findByName('processPaidGoogleServices')?.dependsOn switchToPaid
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -92,7 +132,6 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-
     implementation "androidx.work:work-runtime-ktx:2.7.1"
     kapt "com.github.bumptech.glide:glide:4.13.2"
 
@@ -122,4 +161,8 @@ dependencies {
 // Espresso dependencies
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 //    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
+
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 }
