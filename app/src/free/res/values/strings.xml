@@ -45,4 +45,6 @@
     <string name="blur">Blur Photo</string>
     <string name="birthday">Input Date of Birth</string>
     <string name="number">Input Phone Number</string>
+    <string name="atau">or</string>
+    <string name="phone">Sign in with phone</string>
 </resources>

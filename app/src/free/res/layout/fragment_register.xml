@@ -50,8 +50,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -68,8 +68,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -86,8 +86,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -106,8 +106,8 @@
                         android:ems="10"
                         android:inputType="date"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -126,8 +126,8 @@
                         android:ems="10"
                         android:inputType="phone"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -146,8 +146,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -166,8 +166,8 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:textColor="#F6F4F4"
-                        android:textColorHint="#FFFFFF"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>

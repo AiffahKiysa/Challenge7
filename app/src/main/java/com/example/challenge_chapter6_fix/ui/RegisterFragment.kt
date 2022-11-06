@@ -14,7 +14,10 @@ import com.example.challenge_chapter6_fix.R
 import com.example.challenge_chapter6_fix.ViewModelFactory
 import com.example.challenge_chapter6_fix.data.DataUserManager
 import com.example.challenge_chapter6_fix.databinding.FragmentRegisterBinding
+import com.example.challenge_chapter6_fix.utils.RegisterUtils
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -28,13 +31,17 @@ class RegisterFragment : Fragment() {
     private lateinit var viewModel: UserViewModel
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var analytics: FirebaseAnalytics
+    private lateinit var register: RegisterUtils
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        register = RegisterUtils
         auth = Firebase.auth
+        analytics = Firebase.analytics
         pref = DataUserManager(requireContext())
         viewModel = ViewModelProvider(this, ViewModelFactory(pref))[UserViewModel::class.java]
         _binding = FragmentRegisterBinding.inflate(inflater,container,false)
@@ -63,23 +70,22 @@ class RegisterFragment : Fragment() {
         val password = binding.txtPassword.text.toString()
         val confirmPassword = binding.txtConfirmPassword.text.toString()
 
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(requireContext(), "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        if (password == confirmPassword){
+        if (register.validate(username, name, email, birthday, nomor, password, confirmPassword)){
             viewModel.saveUser(username, name, email, birthday, nomor, password)
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(requireContext(), "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
             Toast.makeText(requireContext(), "Data Save", Toast.LENGTH_SHORT).show()
         }
         else

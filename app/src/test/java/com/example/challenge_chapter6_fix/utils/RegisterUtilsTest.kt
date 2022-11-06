@@ -41,9 +41,7 @@ class RegisterUtilsTest {
 
     @Test
     fun email_validate(){
-        val emptyResult = register.validate("username", "aiffah kiysa", "", "22/03/2004", "082132498770", "hjbfjewnijw", "hjbfjewnijw")
         val notContainsResult = register.validate("username", "aiffah kiysa", "aaaab", "22/03/2004", "082132498770", "hjbfjewnijw", "hjbfjewnijw")
-        assertEquals(emptyResult, expectedValue)
         assertEquals(notContainsResult, expectedValue)
     }
 

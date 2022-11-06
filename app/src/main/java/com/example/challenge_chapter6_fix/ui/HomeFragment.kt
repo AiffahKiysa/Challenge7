@@ -21,12 +21,16 @@ import com.example.challenge_chapter6_fix.service.ApiHelper
 import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var pref: DataUserManager
+    private lateinit var analytics: FirebaseAnalytics
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -38,6 +42,7 @@ class HomeFragment : Fragment(), MovieAdapter.ListMovieInterface {
         savedInstanceState: Bundle?
     ): View? {
 
+        analytics = Firebase.analytics
         pref = DataUserManager(requireContext())
         userViewModel = ViewModelProvider(this, ViewModelFactory(pref))[UserViewModel::class.java]
 

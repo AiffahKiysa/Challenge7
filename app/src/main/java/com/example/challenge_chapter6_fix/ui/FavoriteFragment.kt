@@ -25,16 +25,22 @@ import com.example.challenge_chapter6_fix.service.ApiClient
 import com.example.challenge_chapter6_fix.service.ApiHelper
 import com.example.challenge_chapter6_fix.viewModel.FavoriteViewModel
 import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 
 class FavoriteFragment : Fragment() {
     private lateinit var viewModel: FavoriteViewModel
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        analytics = Firebase.analytics
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }

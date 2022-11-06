@@ -32,6 +32,8 @@ import com.example.challenge_chapter6_fix.databinding.FragmentProfileBinding
 import com.example.challenge_chapter6_fix.viewModel.BlurViewModel
 import com.example.challenge_chapter6_fix.viewModel.UserViewModel
 import com.example.challenge_chapter6_fix.workers.BlurModelFactory
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -47,6 +49,7 @@ class ProfileFragment : Fragment() {
     private lateinit var pref: DataUserManager
     private var image_uri: Uri? = null
     private lateinit var auth: FirebaseAuth
+    private lateinit var analytics: FirebaseAnalytics
 
     companion object {
         private val PERMISSION_CODE = 100;
@@ -58,6 +61,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        analytics = Firebase.analytics
         auth = Firebase.auth
         pref = DataUserManager(requireContext())
         userViewModel = ViewModelProvider(this, ViewModelFactory(pref))[UserViewModel::class.java]

@@ -20,6 +20,9 @@ import com.example.challenge_chapter6_fix.databinding.FragmentDetailBinding
 import com.example.challenge_chapter6_fix.viewModel.FavoriteViewModel
 import com.example.challenge_chapter6_fix.viewModel.MovieViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,12 +34,14 @@ class DetailFragment : Fragment() {
     private lateinit var viewModel : FavoriteViewModel
     private var isClicked = false
     private lateinit var data : FavoriteData
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        analytics = Firebase.analytics
          viewModel = ViewModelProvider(
                     this)[FavoriteViewModel::class.java]
         _binding = FragmentDetailBinding.inflate(inflater, container, false)

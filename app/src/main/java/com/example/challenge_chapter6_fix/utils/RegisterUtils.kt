@@ -12,7 +12,6 @@ object RegisterUtils {
         if (name.isEmpty()) return false
         if (name.length<6) return false
 
-        if (email.isEmpty()) return false
         if (!email.contains("@")) return false
         if (email.filter { it.isDigit() }.isEmpty()) return false
 
