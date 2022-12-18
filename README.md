@@ -16,3 +16,4 @@
 ### 4. Menerapkan buildFlavoring.
 - [free](https://github.com/Binar-Academy-Android/Challenge_Chapter7/tree/main/app/src/free)
 - [paid](https://github.com/Binar-Academy-Android/Challenge_Chapter7/tree/main/app/src/paid)
+- [buildtype, defaultconfig, productflavors](https://github.com/Binar-Academy-Android/Challenge_Chapter7/blob/main/app/build.gradle)
