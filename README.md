@@ -11,7 +11,9 @@
 - [dokumentasi profiler](https://docs.google.com/document/d/12FpBux3TeMqvWUygPsGhjVEoxI1ZsZIrnSf3zRAepAU/edit)
 
 ### 3. Melakukan testing untuk pengujian aplikasi.
-- [testing](https://docs.google.com/document/d/12FpBux3TeMqvWUygPsGhjVEoxI1ZsZIrnSf3zRAepAU/edit?usp=sharing)
+- [testing repository](https://github.com/Binar-Academy-Android/Challenge_Chapter7/blob/main/app/src/test/java/com/example/challenge_chapter6_fix/repository/MainRepositoryTest.kt)
+- [testing login](https://github.com/Binar-Academy-Android/Challenge_Chapter7/blob/main/app/src/test/java/com/example/challenge_chapter6_fix/utils/LoginUtilsTest.kt)
+- [testing register](https://github.com/Binar-Academy-Android/Challenge_Chapter7/blob/main/app/src/test/java/com/example/challenge_chapter6_fix/utils/RegisterUtilsTest.kt)
 
 ### 4. Menerapkan buildFlavoring.
 - [free](https://github.com/Binar-Academy-Android/Challenge_Chapter7/tree/main/app/src/free)
