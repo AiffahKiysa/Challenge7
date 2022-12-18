@@ -13,12 +13,8 @@ class UserViewModel(private val pref: DataUserManager): ViewModel() {
                  birthday: String, nomor: String,
                  password: String){
         viewModelScope.launch {
-            pref.setUsername(username)
-            pref.setPassword(password)
-            pref.setName(name)
-            pref.setEmail(email)
-            pref.setBirthday(birthday)
-            pref.setNomor(nomor)
+            pref.setUser(username, name, email,
+                password, birthday, nomor)
         }
     }
 

@@ -47,38 +47,14 @@ class DataUserManager(private val context: Context){
         }
     }
 
-    suspend fun setUsername(username: String) {
+    suspend fun setUser(username: String, name: String, email: String,
+                            password: String, birthday: String, nomor: String) {
         context.dataUser.edit { preferences ->
             preferences[USERNAME] = username
-        }
-    }
-
-    suspend fun setPassword(password: String) {
-        context.dataUser.edit { preferences ->
             preferences[PASSWORD] = password
-        }
-    }
-
-    suspend fun setName(name: String) {
-        context.dataUser.edit { preferences ->
             preferences[NAME] = name
-        }
-    }
-
-    suspend fun setEmail(email: String) {
-        context.dataUser.edit { preferences ->
             preferences[EMAIL] = email
-        }
-    }
-
-    suspend fun setBirthday(birthday: String) {
-        context.dataUser.edit { preferences ->
             preferences[BIRTHDAY] = birthday
-        }
-    }
-
-    suspend fun setNomor(nomor: String) {
-        context.dataUser.edit { preferences ->
             preferences[NOMOR] = nomor
         }
     }
@@ -88,11 +64,6 @@ class DataUserManager(private val context: Context){
             preferences[IS_LOGIN] = isLogin
         }
     }
-
-    suspend fun getPreferences(context: Context): Flow<Preferences> {
-        return context.dataUser.data
-    }
-
 
     fun getPassword(): Flow<String>{
         return context.dataUser.data.map { preferences ->
